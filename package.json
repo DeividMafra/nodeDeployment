@@ -1,0 +1,27 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "The back end for the project",
+  "main": "app.js",
+  "dependencies": {
+    "@types/express": "^4.17.3",
+    "@types/node": "^13.7.7",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7"
+  },
+  "engines": {
+    "node": "10.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "node dist/app.js",
+    "debug": "tsc -w | nodemon dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deivid Mafra, Sherwayne Palmer, Diego Perez",
+  "license": "ISC"
+}
