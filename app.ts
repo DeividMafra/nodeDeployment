@@ -5,6 +5,7 @@ const studentRouter = require('./routes/studentRouter');
 const activityRouter = require('./routes/activityRouter');
 const programRouter = require('./routes/programRouter');
 const teacherRouter = require('./routes/teacherRouter');
+const classRouter = require('./routes/classRouter');
 var db = require('./db/db');
 
 var app = express();
@@ -14,6 +15,7 @@ app.use('/student', studentRouter);
 app.use('/activity', activityRouter);
 app.use('/programs', programRouter);
 app.use('/teachers', teacherRouter);
+app.use('/class', classRouter);
 
 let port: any = process.env.PORT;
 if (port == null || port == "") {

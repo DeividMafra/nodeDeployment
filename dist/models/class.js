@@ -1,8 +1,9 @@
 "use strict";
 var mongoose = require('mongoose');
-var classSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+var classSchema = new Schema({
     classId: String,
-    className: String
-});
-var Class = mongoose.model('Class', classSchema);
-module.exports = { classSchema: classSchema, Class: Class };
+    className: String,
+    programs: [String]
+}, { collection: 'class' });
+module.exports = mongoose.model('class', classSchema);

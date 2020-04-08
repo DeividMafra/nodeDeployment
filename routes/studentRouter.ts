@@ -3,21 +3,25 @@ import { Request, Response } from 'express';
 const express = require('express');
 const router = express.Router();
 const Student = require('../models/student');
-const db = require('../db/db');
 
 router.get('/', function (req: Request, res: Response) {
-    
+
     Student.find(function (err: Error, students: any) {
         if (err)
             res.end('An error ocurred trying to get the students');
 
-        console.log('Vamos por buen camino ', students);
-        res.json(students);
+        let respond = {
+            code: 'Ok',
+            data: students,
+            message: "The students was consulted correctly.",
+        }
+
+        res.json(respond);
     });
 });
 
 router.get('/:id', function (req: Request, res: Response) {
-    
+
     Student.find({ "_id": req.params.id }, function (err: Error, students: any) {
         if (err)
             res.end('An error ocurred trying to get the students');
@@ -25,6 +29,9 @@ router.get('/:id', function (req: Request, res: Response) {
     });
 });
 
+/**
+ * @author Diego.Perez
+ */
 router.post('/delete', function (req: Request, res: Response) {
     Student.deleteOne({ _id: req.body.id }, function (err: Error, students: any) {
         if (err)
@@ -45,15 +52,52 @@ router.post('/delete', function (req: Request, res: Response) {
 
 router.post('/', function (req: Request, res: Response) {
     let student = new Student(req.body);
-    
-    student.save((err: Error, student: any) => {
-        if (err) {
-            res.send('La estas embarrando nayo');
-        }
+    console.log('=======================> ', req.body);
+    Student.create(student, (err: Error, student: any) => {
+        if (err)
+            throw err;
+        else {
+            // res.send('La estas embarrando nayo');
 
-        console.log('los estudiantes: ', student);
-        res.json(student);
+            let respond = {
+                data: student,
+                message: "The student was saved correctly.",
+            }
+            res.json(respond);
+        }
     });
+});
+
+/**
+ * @author Diego.Perez
+ * @date 04/05/2020
+ */
+router.post('/update', function (req: Request, res: Response) {
+    //let student = new Student(req.body);
+    console.log('-----------------------------> ', req.body);
+    Student.updateOne(
+        { _id: req.body._id },
+        {
+            $set: {
+                studentId: req.body.studentId,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                programId: req.body.programId,
+                classes: req.body.classes
+            }
+        },
+        (err: Error, student: any) => {
+            if (err) {
+                res.send('La estas embarrando nayo en Update');
+            }
+
+            let respond = {
+                data: student,
+                message: "The student was updated correctly.",
+            }
+            res.json(respond);
+        });
 });
 
 module.exports = router;

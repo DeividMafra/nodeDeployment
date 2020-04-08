@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 
-var classSchema = new mongoose.Schema({
-    classId: String,
-    className: String
-});
+var Schema = mongoose.Schema;
+var classSchema = new Schema(
+    {
+        classId: String,
+        className: String,
+        programs: [String]
+    },
+    {collection: 'class'}
+);
 
-var Class = mongoose.model('Class', classSchema);
-
-module.exports = {classSchema, Class};
+module.exports = mongoose.model('class', classSchema);

@@ -6,6 +6,7 @@ var studentRouter = require('./routes/studentRouter');
 var activityRouter = require('./routes/activityRouter');
 var programRouter = require('./routes/programRouter');
 var teacherRouter = require('./routes/teacherRouter');
+var classRouter = require('./routes/classRouter');
 var db = require('./db/db');
 var app = express();
 app.use(cors());
@@ -14,6 +15,8 @@ app.use('/student', studentRouter);
 app.use('/activity', activityRouter);
 app.use('/programs', programRouter);
 app.use('/teachers', teacherRouter);
+app.use('/class', classRouter);
+
 var port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;
