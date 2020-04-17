@@ -35,8 +35,8 @@ app.post('/', function (req, res) {
  * @date 03/31/2020;
  * @author Deivid Mafra;
  */
-app.put('/:teacherId', function (req, res) {
-    return Teacher.updateOne({ teacherId: req.params.teacherId }, {
+app.put('/:_id', function (req, res) {
+    return Teacher.updateOne({ _id: req.params._id }, {
         $set: {
             teacherId: req.body.teacherId,
             firstName: req.body.firstName,

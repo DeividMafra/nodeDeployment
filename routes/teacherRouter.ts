@@ -41,9 +41,9 @@ app.post('/', function (req: Request, res: Response) {
  * @date 03/31/2020;
  * @author Deivid Mafra;
  */
-app.put('/:teacherId', (req: Request, res: Response) => {
+app.put('/:_id', (req: Request, res: Response) => {
   return Teacher.updateOne(
-    { teacherId: req.params.teacherId },
+    { _id: req.params._id },
     {
       $set: {
         teacherId: req.body.teacherId,
