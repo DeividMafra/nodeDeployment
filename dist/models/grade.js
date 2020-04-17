@@ -2,9 +2,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var gradeSchema = new Schema({
-    gradeId: String,
+    // gradeId: String,
     gradeLetter: String,
     grade: String,
+    studentId: String,
+    course: String
 }, { collection: 'grade' } //grade collection
 );
 module.exports = mongoose.model('grade', gradeSchema);

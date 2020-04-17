@@ -35,12 +35,37 @@ router.post('/delete', function (req, res) {
 });
 router.post('/', function (req, res) {
     var grade = new Grade(req.body);
-    grade.save(function (err, grade) {
+    grade.save(function (err, rpt) {
         if (err) {
             res.send('one grade added');
         }
-        console.log('one grade added: ', grade);
-        res.json(grade);
+        console.log('one grade added: ', rpt);
+        res.json(rpt);
+    });
+});
+router.delete('/:_id', function (req, res) {
+    return Grade.deleteOne({ _id: req.params._id }, function (err) {
+        if (err)
+            throw err;
+        else {
+            res.status(200).json({
+                message: 'Deleted successful!'
+            });
+        }
+    });
+});
+router.put('/:_id', function (req, res) {
+    return Grade.updateOne({ _id: req.params._id }, {
+        $set: {
+            gradeLetter: req.body.gradeLetter,
+            grade: req.body.grade,
+            studentId: req.body.studentId,
+            course: req.body.course,
+        }
+    }).then(function () {
+        res.status(200).json({
+            message: req.body._id + " Updated successful!"
+        });
     });
 });
 module.exports = router;
